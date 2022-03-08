@@ -13,6 +13,17 @@ const theme = createTheme({
       main: yellow[700],
     },
   },
+  components: {
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          marginTop: 0,
+          height: 0,
+        },
+      },
+    },
+
+  },
 });
 
 export default theme;

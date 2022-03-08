@@ -31,7 +31,7 @@ export default function SignInForm() {
       <form align="center" onSubmit={formik.handleSubmit}>
         <div>
           <TextField
-            sx={{ minWidth: 300, mt: 2 }}
+            sx={{ minWidth: 300, mt: 3 }}
             id="emailSignIn"
             name="email"
             label="E-mail"
@@ -44,7 +44,7 @@ export default function SignInForm() {
         </div>
         <div>
           <TextField
-            sx={{ minWidth: 300, mt: 2 }}
+            sx={{ minWidth: 300, mt: 3 }}
             id="passwordSignIn"
             name="password"
             label="Password"
@@ -56,7 +56,7 @@ export default function SignInForm() {
             helperText={formik.touched.password && formik.errors.password}
           />
         </div>
-        <Button sx={{ minWidth: 250, mt: 2, mb: 0.2 }} variant="contained" type="submit" id="buttonSignIn">
+        <Button sx={{ minWidth: 250, mt: 3, mb: 0.2 }} variant="contained" type="submit" id="buttonSignIn">
           Sign In!
         </Button>
         <Typography variant="body2" color>

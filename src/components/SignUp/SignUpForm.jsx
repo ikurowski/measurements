@@ -22,6 +22,7 @@ export default function SignUpForm() {
     },
     validationSchema: SignUpValidationSchema,
   });
+  console.log(<TextField />);
 
   return (
     <>
@@ -29,7 +30,7 @@ export default function SignUpForm() {
       <form align="center" onSubmit={formik.handleSubmit}>
         <div>
           <TextField
-            sx={{ minWidth: 300, mt: 2 }}
+            sx={{ minWidth: 300, mt: 3 }}
             id="name"
             name="name"
             label="Name"
@@ -38,14 +39,11 @@ export default function SignUpForm() {
             onChange={formik.handleChange}
             error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.touched.name && formik.errors.name}
-            // FormHelperTextProps={{
-            //   className: classes.helperText,
-            // }}
           />
         </div>
         <div>
           <TextField
-            sx={{ minWidth: 300, mt: 2 }}
+            sx={{ minWidth: 300, mt: 3 }}
             id="emailSignUp"
             name="email"
             label="E-mail"
@@ -58,7 +56,7 @@ export default function SignUpForm() {
         </div>
         <div>
           <TextField
-            sx={{ minWidth: 300, mt: 2 }}
+            sx={{ minWidth: 300, mt: 3 }}
             id="passwordSignUp"
             name="password"
             label="Password"
@@ -72,7 +70,7 @@ export default function SignUpForm() {
         </div>
         <div>
           <TextField
-            sx={{ minWidth: 300, mt: 2 }}
+            sx={{ minWidth: 300, mt: 3 }}
             id="confirmPassword"
             name="confirmPassword"
             label="Confirm Password"
@@ -85,7 +83,7 @@ export default function SignUpForm() {
           />
         </div>
 
-        <Button sx={{ minWidth: 250, mt: 2, mb: 0.2 }} variant="contained" type="submit" id="buttonSignUp">
+        <Button sx={{ minWidth: 250, mt: 3, mb: 0.2 }} variant="contained" type="submit" id="buttonSignUp">
           Sign up!
         </Button>
       </form>
