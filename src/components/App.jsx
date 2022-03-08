@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import theme from '../theme';
 import NavBar from './NavBar/NavBar';
-import SingUp from './SingUp/SingUp';
+import LandingPage from './LandingPage/LandingPage';
 
 export default function App() {
   return (
@@ -21,7 +21,7 @@ export default function App() {
       <CssBaseline />
       <NavBar />
       <Container maxWidth="sm">
-        <SingUp />
+        <LandingPage />
       </Container>
     </ThemeProvider>
   );
