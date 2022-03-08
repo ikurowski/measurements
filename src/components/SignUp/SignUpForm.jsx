@@ -7,7 +7,7 @@ import {
   Link,
 } from '@mui/material';
 import { useFormik } from 'formik';
-import userValidationSchema from '../../validations/UserValidation';
+import SignUpValidationSchema from '../../validations/SignUpValidation';
 import { signUp } from '../../firebase';
 import SignUpHeader from './SignUpHeader';
 
@@ -20,7 +20,7 @@ export default function SignUpForm() {
       console.log(JSON.stringify(values, null, 2));
       signUp(values.email, values.password);
     },
-    validationSchema: userValidationSchema,
+    validationSchema: SignUpValidationSchema,
   });
 
   return (
@@ -38,6 +38,9 @@ export default function SignUpForm() {
             onChange={formik.handleChange}
             error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.touched.name && formik.errors.name}
+            // FormHelperTextProps={{
+            //   className: classes.helperText,
+            // }}
           />
         </div>
         <div>

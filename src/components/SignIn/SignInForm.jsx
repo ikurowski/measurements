@@ -8,7 +8,7 @@ import {
 
 import React from 'react';
 import { useFormik } from 'formik';
-import userValidationSchema from '../../validations/UserValidation';
+import SignInValidationSchema from '../../validations/SignInValidation';
 import { signIn } from '../../firebase';
 import SignInHeader from './SignInHeader';
 
@@ -18,10 +18,11 @@ export default function SignInForm() {
       email: '', password: '',
     },
     onSubmit: (values) => {
+      console.log('123');
       console.log(JSON.stringify(values, null, 2));
       signIn(values.email, values.password);
     },
-    validationSchema: userValidationSchema,
+    validationSchema: SignInValidationSchema,
   });
 
   return (
@@ -64,10 +65,6 @@ export default function SignInForm() {
             sx={{ pl: 0.2 }}
             href="/SignUp"
             type="button"
-            // component="button"
-            // onClick={() => {
-            //   console.info("I'm a button.");
-            // }}
           >
             Sign up here.
           </Link>
