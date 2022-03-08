@@ -1,13 +1,8 @@
 import * as Yup from 'yup';
 
-const userSchema = Yup.object({
-  email: Yup.string().email().required(),
-  password: Yup.string()
-    .required('Please Enter your password')
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/,
-      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character',
-    ),
+const userValidationSchema = Yup.object({
+  email: Yup.string().email('Proper E-mail required').required('E-mail required'),
+  password: Yup.string().required('Please Enter your password').min(6, 'Password must be at least 6 characters long'),
 });
 
-export default userSchema;
+export default userValidationSchema;
