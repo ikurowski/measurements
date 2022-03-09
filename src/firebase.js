@@ -1,6 +1,12 @@
 /* eslint-disable no-unused-vars */
+
 import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -11,26 +17,28 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export const auth = getAuth();
+export const auth = getAuth(app);
 
-export async function signUp(email, password) {
+export async function signUp(email, password, setErrorsAPI, setRegisterIn) {
   try {
     const user = await createUserWithEmailAndPassword(auth, email, password);
-    console.log(user);
+    setRegisterIn(true);
   } catch (error) {
-    console.log(error.message);
+    setErrorsAPI(error.message);
   }
 }
 
-export async function signIn(email, password) {
+export async function signIn(email, password, setErrorsAPI, setLogged) {
   try {
     const user = await signInWithEmailAndPassword(auth, email, password);
-    console.log(user);
+    setLogged(true);
   } catch (error) {
-    console.log(error.message);
+    setErrorsAPI(error.message);
   }
 }
-// export async function LagOut(email, password) {}
+
+export async function LogOut() {
+  signOut(auth);
+}

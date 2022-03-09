@@ -1,26 +1,29 @@
 /* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from 'react';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import {
-  Button,
-  TextField,
-  Typography,
-  Link,
+  Button, TextField, Typography, Link, Alert,
 } from '@mui/material';
-
-import React from 'react';
 import { useFormik } from 'formik';
 import SignInValidationSchema from '../../validations/SignInValidation';
-import { signIn } from '../../firebase';
+import { signIn, auth } from '../../firebase';
 import SignInHeader from './SignInHeader';
 
+const INITIAL_FORM_STATE = {
+  email: '',
+  password: '',
+};
+
 export default function SignInForm() {
+  const [logged, setLogged] = useState(null);
+  const [ErrorsAPI, setErrorsAPI] = useState('');
+  const navigate = useNavigate();
+
   const formik = useFormik({
-    initialValues: {
-      email: '', password: '',
-    },
+    initialValues: INITIAL_FORM_STATE,
     onSubmit: (values) => {
-      console.log('123');
-      console.log(JSON.stringify(values, null, 2));
-      signIn(values.email, values.password);
+      signIn(values.email, values.password, setErrorsAPI, setLogged);
     },
     validationSchema: SignInValidationSchema,
   });
@@ -29,6 +32,7 @@ export default function SignInForm() {
     <>
       <SignInHeader />
       <form align="center" onSubmit={formik.handleSubmit}>
+        {ErrorsAPI && <Alert sx={{ margin: 'auto', width: 300 }} severity="error">Wrong e-mail or password</Alert>}
         <div>
           <TextField
             sx={{ minWidth: 300, mt: 3 }}
@@ -56,22 +60,21 @@ export default function SignInForm() {
             helperText={formik.touched.password && formik.errors.password}
           />
         </div>
-        <Button sx={{ minWidth: 250, mt: 3, mb: 0.2 }} variant="contained" type="submit" id="buttonSignIn">
+        <Button
+          sx={{ minWidth: 250, mt: 3, mb: 0.2 }}
+          variant="contained"
+          type="submit"
+          id="buttonSignIn"
+        >
           Sign In!
         </Button>
         <Typography variant="body2" color>
           Not have an account?
-          <Link
-            sx={{ pl: 0.2 }}
-            href="/SignUp"
-            type="button"
-          >
+          <Link sx={{ pl: 0.2 }} href="/SignUp" type="button">
             Sign up here.
           </Link>
         </Typography>
       </form>
-
     </>
-
   );
 }

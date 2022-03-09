@@ -1,33 +1,43 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import {
   Button,
   TextField,
   Typography,
   Link,
+  Alert,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import SignUpValidationSchema from '../../validations/SignUpValidation';
 import { signUp } from '../../firebase';
 import SignUpHeader from './SignUpHeader';
 
+const INITIAL_FORM_STATE = {
+  name: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+};
+
 export default function SignUpForm() {
+  const [registerIn, setRegisterIn] = useState(false);
+  const [ErrorsAPI, setErrorsAPI] = useState('');
+
   const formik = useFormik({
-    initialValues: {
-      name: '', email: '', password: '', confirmPassword: '',
-    },
+    initialValues: INITIAL_FORM_STATE,
     onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
-      signUp(values.email, values.password);
+      signUp(values.email, values.password, setErrorsAPI, setRegisterIn);
     },
     validationSchema: SignUpValidationSchema,
   });
-  console.log(<TextField />);
 
   return (
     <>
+      {registerIn && <Navigate to="/" />}
       <SignUpHeader />
       <form align="center" onSubmit={formik.handleSubmit}>
+        {ErrorsAPI && <Alert sx={{ margin: 'auto', width: 300 }} severity="error">Wrong e-mail or password</Alert>}
         <div>
           <TextField
             sx={{ minWidth: 300, mt: 3 }}
