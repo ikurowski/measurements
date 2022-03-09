@@ -9,6 +9,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
+import ScaleIcon from '@mui/icons-material/Scale';
+
 import { auth, logOut } from '../../firebase';
 
 export default function NavBar() {
@@ -29,17 +31,18 @@ export default function NavBar() {
           <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <ScaleIcon fontSize="large" sx={{ display: { xs: 'flex', sm: 'none' }, flexGrow: 1 }} />
+          <Typography variant="h6" component="div" sx={{ display: { xs: 'none', sm: 'flex' }, flexGrow: 1 }}>
             Measurements
           </Typography>
           {LoggedIn ? (
             <>
-              <Button disableTouchRipple color="inherit">{auth.currentUser?.email}</Button>
-              <Button href="/" onClick={() => logOut()} color="inherit" sx={{ ml: 3 }} startIcon={<LogoutIcon />}>
+              <Button sx={{ display: { xs: 'none', sm: 'flex' }, ml: 'auto' }} disableTouchRipple color="inherit">{auth.currentUser?.email}</Button>
+              <Button href="/" onClick={() => logOut()} color="inherit" sx={{ ml: { /* xs: 'auto',  */sm: 3 } }} startIcon={<LogoutIcon />}>
                 Log out
               </Button>
             </>
-          ) : <Button href="/" color="inherit"> Login </Button> }
+          ) : <Button sx={{ ml: 'auto' }} href="/" color="inherit"> Login </Button> }
         </Toolbar>
       </AppBar>
     </Box>
