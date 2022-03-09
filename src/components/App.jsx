@@ -11,9 +11,11 @@ import {
   Container,
   ThemeProvider,
 } from '@mui/material';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import theme from '../theme';
 import NavBar from './NavBar/NavBar';
-import LandingPage from './LandingPage/LandingPage';
+import SignInForm from './SignIn/SignInForm';
+import SignUpForm from './SignUp/SignUpForm';
 
 export default function App() {
   return (
@@ -21,7 +23,12 @@ export default function App() {
       <CssBaseline />
       <NavBar />
       <Container maxWidth="sm">
-        <LandingPage />
+        <Router>
+          <Routes>
+            <Route path="/" element={<SignInForm />} />
+            <Route path="/SignUp" element={<SignUpForm />} />
+          </Routes>
+        </Router>
       </Container>
     </ThemeProvider>
   );
