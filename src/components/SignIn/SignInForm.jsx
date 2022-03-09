@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink, Navigate, useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import {
   Button, TextField, Typography, Link, Alert,
@@ -16,14 +16,23 @@ const INITIAL_FORM_STATE = {
 };
 
 export default function SignInForm() {
-  const [logged, setLogged] = useState(null);
   const [ErrorsAPI, setErrorsAPI] = useState('');
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigate('/Main');
+      }
+    });
+    return unsubscribe;
+  }, []);
 
   const formik = useFormik({
     initialValues: INITIAL_FORM_STATE,
     onSubmit: (values) => {
-      signIn(values.email, values.password, setErrorsAPI, setLogged);
+      signIn(values.email, values.password, setErrorsAPI);
     },
     validationSchema: SignInValidationSchema,
   });

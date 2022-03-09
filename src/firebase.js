@@ -30,15 +30,14 @@ export async function signUp(email, password, setErrorsAPI, setRegisterIn) {
   }
 }
 
-export async function signIn(email, password, setErrorsAPI, setLogged) {
+export async function signIn(email, password, setErrorsAPI) {
   try {
     const user = await signInWithEmailAndPassword(auth, email, password);
-    setLogged(true);
   } catch (error) {
     setErrorsAPI(error.message);
   }
 }
 
-export async function LogOut() {
+export async function logOut() {
   signOut(auth);
 }

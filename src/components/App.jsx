@@ -16,20 +16,22 @@ import theme from '../theme';
 import NavBar from './NavBar/NavBar';
 import SignInForm from './SignIn/SignInForm';
 import SignUpForm from './SignUp/SignUpForm';
+import MainPage from './MainPage/MainPage';
 
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <NavBar />
-      <Container maxWidth="sm">
-        <Router>
+      <Router>
+        <CssBaseline />
+        <NavBar />
+        <Container maxWidth="sm">
           <Routes>
             <Route path="/" element={<SignInForm />} />
             <Route path="/SignUp" element={<SignUpForm />} />
+            <Route path="/Main" element={<MainPage />} />
           </Routes>
-        </Router>
-      </Container>
+        </Container>
+      </Router>
     </ThemeProvider>
   );
 }

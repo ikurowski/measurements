@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 import {
   Button,
   TextField,
@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { useFormik } from 'formik';
 import SignUpValidationSchema from '../../validations/SignUpValidation';
-import { signUp } from '../../firebase';
+import { auth, signUp } from '../../firebase';
 import SignUpHeader from './SignUpHeader';
 
 const INITIAL_FORM_STATE = {
@@ -21,7 +21,7 @@ const INITIAL_FORM_STATE = {
 };
 
 export default function SignUpForm() {
-  const [registerIn, setRegisterIn] = useState(false);
+  const [registerIn, setRegisterIn] = useState(null);
   const [ErrorsAPI, setErrorsAPI] = useState('');
 
   const formik = useFormik({
@@ -34,23 +34,10 @@ export default function SignUpForm() {
 
   return (
     <>
-      {registerIn && <Navigate to="/" />}
+      {registerIn && <Navigate to="/Main" />}
       <SignUpHeader />
       <form align="center" onSubmit={formik.handleSubmit}>
         {ErrorsAPI && <Alert sx={{ margin: 'auto', width: 300 }} severity="error">Wrong e-mail or password</Alert>}
-        <div>
-          <TextField
-            sx={{ minWidth: 300, mt: 3 }}
-            id="name"
-            name="name"
-            label="Name"
-            variant="outlined"
-            value={formik.values.name}
-            onChange={formik.handleChange}
-            error={formik.touched.name && Boolean(formik.errors.name)}
-            helperText={formik.touched.name && formik.errors.name}
-          />
-        </div>
         <div>
           <TextField
             sx={{ minWidth: 300, mt: 3 }}

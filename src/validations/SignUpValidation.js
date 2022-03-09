@@ -1,7 +1,6 @@
 import * as Yup from 'yup';
 
 const SignUpValidationSchema = Yup.object({
-  name: Yup.string().required('Name required').min(2, 'Name must be at least 2 characters long'),
   email: Yup.string().email('Proper E-mail required').required('E-mail required'),
   password: Yup.string()
     .required('Please Enter your password')
