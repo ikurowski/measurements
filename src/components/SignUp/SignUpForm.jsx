@@ -37,10 +37,10 @@ export default function SignUpForm() {
       {registerIn && <Navigate to="/Main" />}
       <SignUpHeader />
       <form align="center" onSubmit={formik.handleSubmit}>
-        {ErrorsAPI && <Alert sx={{ margin: 'auto', width: 300 }} severity="error">Wrong e-mail or password</Alert>}
+        {ErrorsAPI && <Alert sx={{ margin: 'auto', width: { md: 300, xs: 240 } }} severity="error">Wrong e-mail or password</Alert>}
         <div>
           <TextField
-            sx={{ minWidth: 300, mt: 3 }}
+            sx={{ minWidth: { md: 300, xs: 240 }, mt: 3 }}
             id="emailSignUp"
             name="email"
             label="E-mail"
@@ -53,7 +53,7 @@ export default function SignUpForm() {
         </div>
         <div>
           <TextField
-            sx={{ minWidth: 300, mt: 3 }}
+            sx={{ minWidth: { md: 300, xs: 240 }, mt: 3 }}
             id="passwordSignUp"
             name="password"
             label="Password"
@@ -67,7 +67,7 @@ export default function SignUpForm() {
         </div>
         <div>
           <TextField
-            sx={{ minWidth: 300, mt: 3 }}
+            sx={{ minWidth: { md: 300, xs: 240 }, mt: 3 }}
             id="confirmPassword"
             name="confirmPassword"
             label="Confirm Password"
@@ -80,7 +80,7 @@ export default function SignUpForm() {
           />
         </div>
 
-        <Button sx={{ minWidth: 250, mt: 3, mb: 0.2 }} variant="contained" type="submit" id="buttonSignUp">
+        <Button sx={{ minWidth: { md: 250, xs: 200 }, mt: 3, mb: 0.2 }} variant="contained" type="submit" id="buttonSignUp">
           Sign up!
         </Button>
       </form>

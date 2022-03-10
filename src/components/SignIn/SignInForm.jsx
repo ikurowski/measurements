@@ -41,10 +41,10 @@ export default function SignInForm() {
     <>
       <SignInHeader />
       <form align="center" onSubmit={formik.handleSubmit}>
-        {ErrorsAPI && <Alert sx={{ margin: 'auto', width: 300 }} severity="error">Wrong e-mail or password</Alert>}
+        {ErrorsAPI && <Alert sx={{ margin: 'auto', width: { md: 300, xs: 240 } }} severity="error">Wrong e-mail or password</Alert>}
         <div>
           <TextField
-            sx={{ minWidth: 300, mt: 3 }}
+            sx={{ minWidth: { md: 300, xs: 240 }, mt: 3 }}
             id="emailSignIn"
             name="email"
             label="E-mail"
@@ -57,7 +57,7 @@ export default function SignInForm() {
         </div>
         <div>
           <TextField
-            sx={{ minWidth: 300, mt: 3 }}
+            sx={{ minWidth: { md: 300, xs: 240 }, mt: 3 }}
             id="passwordSignIn"
             name="password"
             label="Password"
@@ -70,15 +70,15 @@ export default function SignInForm() {
           />
         </div>
         <Button
-          sx={{ minWidth: 250, mt: 3, mb: 0.2 }}
+          sx={{ minWidth: { md: 250, xs: 200 }, mt: 3, mb: 0.2 }}
           variant="contained"
           type="submit"
           id="buttonSignIn"
         >
           Sign In!
         </Button>
-        <Typography variant="body2" color>
-          Not have an account?
+        <Typography fontSize={{ xs: 'small', md: 16 }} variant="body2" color>
+          { 'Don\'t have an account?'}
           <Link sx={{ pl: 0.2 }} href="/SignUp" type="button">
             Sign up here.
           </Link>

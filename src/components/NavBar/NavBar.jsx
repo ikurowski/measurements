@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
@@ -10,10 +11,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import ScaleIcon from '@mui/icons-material/Scale';
-
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { auth, logOut } from '../../firebase';
 
-export default function NavBar() {
+export default function NavBar({ toggleDrawer }) {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('xs'));
   const [LoggedIn, setLoggedIn] = useState(null);
 
   auth.onAuthStateChanged((user) => {
@@ -28,7 +32,7 @@ export default function NavBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="relative">
         <Toolbar>
-          <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+          <IconButton onClick={toggleDrawer('left', true)} size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
             <MenuIcon />
           </IconButton>
           <ScaleIcon fontSize="large" sx={{ display: { xs: 'flex', sm: 'none' }, flexGrow: 1 }} />
@@ -38,7 +42,7 @@ export default function NavBar() {
           {LoggedIn ? (
             <>
               <Button sx={{ display: { xs: 'none', sm: 'flex' }, ml: 'auto' }} disableTouchRipple color="inherit">{auth.currentUser?.email}</Button>
-              <Button href="/" onClick={() => logOut()} color="inherit" sx={{ ml: { /* xs: 'auto',  */sm: 3 } }} startIcon={<LogoutIcon />}>
+              <Button href="/" onClick={() => logOut()} color="inherit" sx={{ ml: 3 }} startIcon={<LogoutIcon />}>
                 Log out
               </Button>
             </>
