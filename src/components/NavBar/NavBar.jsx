@@ -17,7 +17,7 @@ import { auth, logOut } from '../../firebase';
 
 export default function NavBar({ toggleDrawer }) {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('xs'));
+  const matches = useMediaQuery(theme.breakpoints.down('md'));
   const [LoggedIn, setLoggedIn] = useState(null);
 
   auth.onAuthStateChanged((user) => {
@@ -32,7 +32,7 @@ export default function NavBar({ toggleDrawer }) {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="relative">
         <Toolbar>
-          <IconButton onClick={toggleDrawer('left', true)} size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+          <IconButton onClick={toggleDrawer(matches ? 'top' : 'left', true)} size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
             <MenuIcon />
           </IconButton>
           <ScaleIcon fontSize="large" sx={{ display: { xs: 'flex', sm: 'none' }, flexGrow: 1 }} />

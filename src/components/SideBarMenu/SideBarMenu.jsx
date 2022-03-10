@@ -4,7 +4,9 @@ import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import NavBar from '../NavBar/NavBar';
+
 // import ListItemIcon from '@mui/material/ListItemIcon';
 // import ListItemText from '@mui/material/ListItemText';
 // import InboxIcon from '@mui/icons-material/MoveToInbox';
@@ -31,18 +33,18 @@ export default function SideBarMenu() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        <ListItem> Siemka </ListItem>
-        <ListItem> Siemka </ListItem>
-        <ListItem> Siemka </ListItem>
-        <ListItem> Siemka </ListItem>
-        <ListItem> Siemka </ListItem>
+        <ListItem button>
+          <AccountCircleIcon color="secondary" sx={{ mr: 1 }} />
+          Profile
+        </ListItem>
+        <ListItem button> lorem ipsum </ListItem>
+        <ListItem button> lorem ipsum </ListItem>
       </List>
       <Divider />
-      <ListItem> Siemka </ListItem>
-      <ListItem> Siemka </ListItem>
-      <ListItem> Siemka </ListItem>
-      <ListItem> Siemka </ListItem>
-      <ListItem> Siemka </ListItem>
+      <ListItem button> lorem ipsum </ListItem>
+      <ListItem button> lorem ipsum </ListItem>
+      <ListItem button> lorem ipsum </ListItem>
+      <ListItem button> lorem ipsum </ListItem>
     </Box>
   );
 
