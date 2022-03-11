@@ -14,6 +14,18 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiInput: {
+      styleOverrides: {
+        root: {
+          input: {
+            '&::-webkit-outer-spin-button, &::-webkit-inner-spin-button': {
+              '-webkit-appearance': 'none',
+              display: 'none',
+            },
+          },
+        },
+      },
+    },
     MuiFormHelperText: {
       styleOverrides: {
         root: {
