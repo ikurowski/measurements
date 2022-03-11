@@ -32,21 +32,50 @@ export default function NavBar({ toggleDrawer }) {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="relative">
         <Toolbar>
-          <IconButton onClick={toggleDrawer(matches ? 'top' : 'left', true)} size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+          <IconButton
+            onClick={toggleDrawer(matches ? 'top' : 'left', true)}
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+          >
             <MenuIcon />
           </IconButton>
-          <ScaleIcon fontSize="large" sx={{ display: { xs: 'flex', sm: 'none' }, flexGrow: 1 }} />
-          <Typography variant="h6" component="div" sx={{ display: { xs: 'none', sm: 'flex' }, flexGrow: 1 }}>
+          <ScaleIcon
+            fontSize="large"
+            sx={{ display: { xs: 'flex', sm: 'none' }, flexGrow: 1, ml: LoggedIn ? 11 : 2 }}
+          />
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ display: { xs: 'none', sm: 'flex' }, flexGrow: 1, ml: 2 }}
+          >
             Measurements
           </Typography>
           {LoggedIn ? (
             <>
-              <Button sx={{ display: { xs: 'none', sm: 'flex' }, ml: 'auto' }} disableTouchRipple color="inherit">{auth.currentUser?.email}</Button>
-              <Button href="/" onClick={() => logOut()} color="inherit" sx={{ ml: 3 }} startIcon={<LogoutIcon />}>
+              <Button
+                sx={{ display: { xs: 'none', sm: 'flex' }, ml: 'auto' }}
+                disableTouchRipple
+                color="inherit"
+              >
+                {auth.currentUser?.email}
+              </Button>
+              <Button
+                href="/"
+                onClick={() => logOut()}
+                color="inherit"
+                sx={{ ml: 3 }}
+                startIcon={<LogoutIcon />}
+              >
                 Log out
               </Button>
             </>
-          ) : <Button sx={{ ml: 'auto' }} href="/" color="inherit"> Login </Button> }
+          ) : (
+            <Button sx={{ ml: 'auto' }} href="/" color="inherit">
+              Login
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </Box>
