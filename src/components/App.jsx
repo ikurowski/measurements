@@ -17,6 +17,7 @@ import SignInForm from './SignIn/SignInForm';
 import SignUpForm from './SignUp/SignUpForm';
 import MainPage from './MainPage/MainPage';
 import SideBarMenu from './SideBarMenu/SideBarMenu';
+import StatisticsTab from './StatisticsTab/StatisticsTab';
 
 export default function App() {
   return (
@@ -24,11 +25,12 @@ export default function App() {
       <Router>
         <CssBaseline />
         <SideBarMenu />
-        <Container maxWidth="sm">
+        <Container>
           <Routes>
             <Route path="/" element={<SignInForm />} />
             <Route path="/SignUp" element={<SignUpForm />} />
             <Route path="/Main" element={<MainPage />} />
+            <Route path="/Statistics" element={<StatisticsTab />} />
           </Routes>
         </Container>
       </Router>

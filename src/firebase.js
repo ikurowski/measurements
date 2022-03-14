@@ -7,6 +7,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
+import {
+  addDoc, collection, deleteDoc, doc, getDocs, getFirestore,
+} from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -18,6 +21,8 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const collectionRef = collection(db, 'measurements');
 
 export const auth = getAuth(app);
 
@@ -40,4 +45,21 @@ export async function signIn(email, password, setErrorsAPI) {
 
 export async function logOut() {
   signOut(auth);
+}
+
+export async function addMeasurements(data) {
+  addDoc(collectionRef, data);
+}
+
+export async function getMeasurements(useState) {
+  const data = await getDocs(collectionRef);
+  useState(data.docs.map((singleDoc) => ({ ...singleDoc.data(), id: singleDoc.id })));
+}
+export async function deleteMeasurements(id) {
+  try {
+    const docRef = doc(db, 'measurements', id);
+    await deleteDoc(docRef);
+  } catch (error) {
+    console.log(error);
+  }
 }

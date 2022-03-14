@@ -19,7 +19,7 @@ const theme = createTheme({
         root: {
           input: {
             '&::-webkit-outer-spin-button, &::-webkit-inner-spin-button': {
-              '-webkit-appearance': 'none',
+              WebkitAppearance: 'none',
               display: 'none',
             },
           },
