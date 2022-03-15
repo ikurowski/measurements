@@ -15,20 +15,15 @@ export default function StatisticsTabs() {
   const [currentUserId, setCurrentUserId] = useState('');
   const [measurements, setMeasurements] = useState([]);
 
-  // FIXME czy cleanup tutaj jest potrzebny????? i skracanie o return
-  useEffect(() => {
-    const unsubscribe = getMeasurements(currentUserId, setMeasurements);
-    return () => unsubscribe();
-  }, []);
-
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         setCurrentUserId(user.uid);
+        getMeasurements(user.uid, setMeasurements);
       }
     });
     return () => unsubscribe();
-  }, []);
+  }, [measurements]);
 
   return (
     <TableContainer sx={{ mt: 3 }} component={Paper}>

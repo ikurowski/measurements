@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 import { initializeApp } from 'firebase/app';
 import {
   getAuth,
@@ -22,7 +20,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
 export const auth = getAuth(app);
 
 export async function signUp(email, password, setErrorsAPI, setRegisterIn) {
@@ -38,7 +35,7 @@ export async function signUp(email, password, setErrorsAPI, setRegisterIn) {
 
 export async function signIn(email, password, setErrorsAPI) {
   try {
-    const user = await signInWithEmailAndPassword(auth, email, password);
+    await signInWithEmailAndPassword(auth, email, password);
   } catch (error) {
     setErrorsAPI(error.message);
   }
@@ -53,7 +50,7 @@ export async function addMeasurements(currentUserId, data) {
     const collectionRef = collection(db, `Users/${currentUserId}/measurements`);
     await addDoc(collectionRef, data);
   } catch (error) {
-    alert(error);
+    console.log(error);
   }
 }
 
@@ -62,9 +59,10 @@ export async function getMeasurements(currentUserId, useState) {
   const data = await getDocs(collectionRef);
   useState(data.docs.map((singleDoc) => ({ ...singleDoc.data(), id: singleDoc.id })));
 }
+
 export async function deleteMeasurements(currentUserId, id) {
   try {
-    const docRef = doc(db, `Users/${currentUserId}`, id);
+    const docRef = doc(db, `Users/${currentUserId}/measurements`, id);
     await deleteDoc(docRef);
   } catch (error) {
     console.log(error);

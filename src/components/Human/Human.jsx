@@ -1,10 +1,10 @@
-/* eslint-disable no-param-reassign */
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import {
-  Alert, TextField, InputAdornment, Button,
+  Alert, TextField, InputAdornment, Button, Snackbar,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import measurementsValidationSchema from '../../validations/measurementsValidationSchema';
@@ -20,7 +20,7 @@ const INITIAL_FORM_STATE = {
 };
 
 export default function Human() {
-  const [visible, setVisible] = useState(false);
+  const [open, setOpen] = useState(false);
   const [currentUserId, setCurrentUserId] = useState('');
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -33,6 +33,14 @@ export default function Human() {
     });
     return () => unsubscribe();
   }, []);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const formik = useFormik({
     initialValues: INITIAL_FORM_STATE,
@@ -48,10 +56,11 @@ export default function Human() {
         calf: values.calf,
       });
       formik.resetForm();
+      setOpen(true);
     },
     validationSchema: measurementsValidationSchema,
     validateOnChange: false,
-    validateOnBlur: false,
+    // validateOnBlur: false,
   });
 
   return (
@@ -80,15 +89,15 @@ export default function Human() {
               style: { fontSize: 60 },
               step: 0.01,
               endAdornment: (
-                <InputAdornment position="end">
-                  {visible && <p style={{ fontSize: 50 }}>cm</p>}
+                <InputAdornment sx={{ display: 'none' }} position="end">
+                  <p style={{ fontSize: 50 }}>cm</p>
                 </InputAdornment>
               ),
             }}
             value={formik.values.neck}
             onChange={formik.handleChange}
-            onFocus={() => setVisible(true)}
-            onBlur={() => setVisible(false)}
+            onFocus={(e) => { e.target.nextElementSibling.style.display = 'flex'; }}
+            onBlur={(e) => { e.target.nextElementSibling.style.display = 'none'; }}
             id="neck"
             step="0.01"
             type="number"
@@ -108,15 +117,15 @@ export default function Human() {
               style: { fontSize: 60 },
               step: 0.01,
               endAdornment: (
-                <InputAdornment position="end">
-                  {visible && <p style={{ fontSize: 50 }}>cm</p>}
+                <InputAdornment sx={{ display: 'none' }} position="end">
+                  <p style={{ fontSize: 50 }}>cm</p>
                 </InputAdornment>
               ),
             }}
             value={formik.values.chest}
             onChange={formik.handleChange}
-            onFocus={() => setVisible(true)}
-            onBlur={() => setVisible(false)}
+            onFocus={(e) => { e.target.nextElementSibling.style.display = 'flex'; }}
+            onBlur={(e) => { e.target.nextElementSibling.style.display = 'none'; }}
             id="chest"
             step="0.01"
             type="number"
@@ -136,15 +145,15 @@ export default function Human() {
               style: { fontSize: 60 },
               step: 0.01,
               endAdornment: (
-                <InputAdornment position="end">
-                  {visible && <p style={{ fontSize: 50 }}>cm</p>}
+                <InputAdornment sx={{ display: 'none' }} position="end">
+                  <p style={{ fontSize: 50 }}>cm</p>
                 </InputAdornment>
               ),
             }}
             value={formik.values.biceps}
             onChange={formik.handleChange}
-            onFocus={() => setVisible(true)}
-            onBlur={() => setVisible(false)}
+            onFocus={(e) => { e.target.nextElementSibling.style.display = 'flex'; }}
+            onBlur={(e) => { e.target.nextElementSibling.style.display = 'none'; }}
             id="biceps"
             step="0.01"
             type="number"
@@ -164,15 +173,15 @@ export default function Human() {
               style: { fontSize: 60 },
               step: 0.01,
               endAdornment: (
-                <InputAdornment position="end">
-                  {visible && <p style={{ fontSize: 50 }}>cm</p>}
+                <InputAdornment sx={{ display: 'none' }} position="end">
+                  <p style={{ fontSize: 50 }}>cm</p>
                 </InputAdornment>
               ),
             }}
             value={formik.values.waist}
             onChange={formik.handleChange}
-            onFocus={() => setVisible(true)}
-            onBlur={() => setVisible(false)}
+            onFocus={(e) => { e.target.nextElementSibling.style.display = 'flex'; }}
+            onBlur={(e) => { e.target.nextElementSibling.style.display = 'none'; }}
             id="waist"
             step="0.01"
             type="number"
@@ -192,15 +201,15 @@ export default function Human() {
               style: { fontSize: 60 },
               step: 0.01,
               endAdornment: (
-                <InputAdornment position="end">
-                  {visible && <p style={{ fontSize: 50 }}>cm</p>}
+                <InputAdornment sx={{ display: 'none' }} position="end">
+                  <p style={{ fontSize: 50 }}>cm</p>
                 </InputAdornment>
               ),
             }}
             value={formik.values.thigh}
             onChange={formik.handleChange}
-            onFocus={() => setVisible(true)}
-            onBlur={() => setVisible(false)}
+            onFocus={(e) => { e.target.nextElementSibling.style.display = 'flex'; }}
+            onBlur={(e) => { e.target.nextElementSibling.style.display = 'none'; }}
             id="thigh"
             step="0.01"
             type="number"
@@ -220,15 +229,15 @@ export default function Human() {
               style: { fontSize: 60 },
               step: 0.01,
               endAdornment: (
-                <InputAdornment position="end">
-                  {visible && <p style={{ fontSize: 50 }}>cm</p>}
+                <InputAdornment sx={{ display: 'none' }} position="end">
+                  <p style={{ fontSize: 50 }}>cm</p>
                 </InputAdornment>
               ),
             }}
             value={formik.values.calf}
             onChange={formik.handleChange}
-            onFocus={() => setVisible(true)}
-            onBlur={() => setVisible(false)}
+            onFocus={(e) => { e.target.nextElementSibling.style.display = 'flex'; }}
+            onBlur={(e) => { e.target.nextElementSibling.style.display = 'none'; }}
             id="calf"
             step="0.01"
             type="number"
@@ -290,6 +299,11 @@ export default function Human() {
       </svg>
 
       {formik.errors.biceps && <Alert sx={{ margin: 'auto', width: { md: 300, xs: 240 } }} severity="error">Complete all fields with correct values</Alert>}
+      <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          Measurements saved!
+        </Alert>
+      </Snackbar>
       <Button
         type="submit"
         sx={{
