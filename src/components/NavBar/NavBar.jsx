@@ -10,6 +10,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import ScaleIcon from '@mui/icons-material/Scale';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import PropTypes from 'prop-types';
 import { auth, logOut } from '../../firebase';
 
 export default function NavBar({ toggleDrawer }) {
@@ -78,3 +79,5 @@ export default function NavBar({ toggleDrawer }) {
     </Box>
   );
 }
+
+NavBar.propTypes = PropTypes.func;
