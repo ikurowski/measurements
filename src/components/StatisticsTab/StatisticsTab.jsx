@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -23,7 +22,7 @@ export default function StatisticsTabs() {
       }
     });
     return () => unsubscribe();
-  }, [measurements]);
+  }, []);
 
   return (
     <TableContainer sx={{ mt: 3 }} component={Paper}>
@@ -82,7 +81,11 @@ export default function StatisticsTabs() {
                 cm
               </TableCell>
               <TableCell sx={{ width: '1%', p: 0 }}>
-                <IconButton onClick={() => deleteMeasurements(currentUserId, measure.id)}>
+                <IconButton onClick={(e) => {
+                  e.target.parentElement.parentElement.parentElement.parentElement.style.display = 'none';
+                  deleteMeasurements(currentUserId, measure.id);
+                }}
+                >
                   <DeleteForeverIcon color="error" />
                 </IconButton>
               </TableCell>

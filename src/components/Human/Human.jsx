@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -8,7 +6,7 @@ import {
 } from '@mui/material';
 import { useFormik } from 'formik';
 import measurementsValidationSchema from '../../validations/measurementsValidationSchema';
-import { addMeasurements, auth, getMeasurements } from '../../firebase';
+import { addMeasurements, auth } from '../../firebase';
 
 const INITIAL_FORM_STATE = {
   neck: '',
@@ -60,7 +58,7 @@ export default function Human() {
     },
     validationSchema: measurementsValidationSchema,
     validateOnChange: false,
-    // validateOnBlur: false,
+    validateOnBlur: false,
   });
 
   return (
@@ -298,7 +296,14 @@ export default function Human() {
         </defs>
       </svg>
 
-      {formik.errors.biceps && <Alert sx={{ margin: 'auto', width: { md: 300, xs: 240 } }} severity="error">Complete all fields with correct values</Alert>}
+      {(
+        formik.errors.neck
+        || formik.errors.chest
+        || formik.errors.biceps
+        || formik.errors.waist
+        || formik.errors.thigh
+        || formik.errors.calf
+      ) && <Alert sx={{ margin: 'auto', width: { md: 300, xs: 240 } }} severity="error">Complete all fields with correct values</Alert>}
       <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={3000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
           Measurements saved!

@@ -9,11 +9,6 @@ import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import BoyIcon from '@mui/icons-material/Boy';
 import NavBar from '../NavBar/NavBar';
 
-// import ListItemIcon from '@mui/material/ListItemIcon';
-// import ListItemText from '@mui/material/ListItemText';
-// import InboxIcon from '@mui/icons-material/MoveToInbox';
-// import MailIcon from '@mui/icons-material/Mail';
-
 export default function SideBarMenu() {
   const [state, setState] = useState({
     top: false,

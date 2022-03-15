@@ -1,16 +1,13 @@
-/* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import {
   Button,
   TextField,
-  Typography,
-  Link,
   Alert,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import SignUpValidationSchema from '../../validations/SignUpValidation';
-import { auth, signUp } from '../../firebase';
+import { signUp } from '../../firebase';
 import SignUpHeader from './SignUpHeader';
 
 const INITIAL_FORM_STATE = {

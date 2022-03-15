@@ -1,13 +1,6 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import {
-  Typography,
-  AppBar,
-  Card,
-  CardContent,
   CssBaseline,
-  Grid,
-  Toolbar,
   Container,
   ThemeProvider,
 } from '@mui/material';

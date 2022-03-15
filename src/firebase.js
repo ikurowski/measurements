@@ -55,9 +55,13 @@ export async function addMeasurements(currentUserId, data) {
 }
 
 export async function getMeasurements(currentUserId, useState) {
-  const collectionRef = collection(db, `Users/${currentUserId}/measurements`);
-  const data = await getDocs(collectionRef);
-  useState(data.docs.map((singleDoc) => ({ ...singleDoc.data(), id: singleDoc.id })));
+  try {
+    const collectionRef = collection(db, `Users/${currentUserId}/measurements`);
+    const data = await getDocs(collectionRef);
+    useState(data.docs.map((singleDoc) => ({ ...singleDoc.data(), id: singleDoc.id })));
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function deleteMeasurements(currentUserId, id) {
