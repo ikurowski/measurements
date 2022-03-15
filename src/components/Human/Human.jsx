@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import {
@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { useFormik } from 'formik';
 import measurementsValidationSchema from '../../validations/measurementsValidationSchema';
-import { addMeasurements, getMeasurements } from '../../firebase';
+import { addMeasurements, auth, getMeasurements } from '../../firebase';
 
 const INITIAL_FORM_STATE = {
   neck: '',
@@ -21,13 +21,23 @@ const INITIAL_FORM_STATE = {
 
 export default function Human() {
   const [visible, setVisible] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState('');
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setCurrentUserId(user.uid);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   const formik = useFormik({
     initialValues: INITIAL_FORM_STATE,
     onSubmit: (values) => {
-      addMeasurements({
+      addMeasurements(currentUserId, {
         date: new Date().toLocaleDateString(),
         time: new Date().toLocaleTimeString(),
         neck: values.neck,

@@ -8,7 +8,7 @@ import {
   signOut,
 } from 'firebase/auth';
 import {
-  addDoc, collection, deleteDoc, doc, getDocs, getFirestore,
+  addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc,
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -22,7 +22,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const collectionRef = collection(db, 'measurements');
 
 export const auth = getAuth(app);
 
@@ -30,6 +29,8 @@ export async function signUp(email, password, setErrorsAPI, setRegisterIn) {
   try {
     const user = await createUserWithEmailAndPassword(auth, email, password);
     setRegisterIn(true);
+    const docRef = doc(db, `Users/${user.user.uid}`);
+    await setDoc(docRef, { email: user.user.email });
   } catch (error) {
     setErrorsAPI(error.message);
   }
@@ -47,17 +48,23 @@ export async function logOut() {
   signOut(auth);
 }
 
-export async function addMeasurements(data) {
-  addDoc(collectionRef, data);
+export async function addMeasurements(currentUserId, data) {
+  try {
+    const collectionRef = collection(db, `Users/${currentUserId}/measurements`);
+    await addDoc(collectionRef, data);
+  } catch (error) {
+    alert(error);
+  }
 }
 
-export async function getMeasurements(useState) {
+export async function getMeasurements(currentUserId, useState) {
+  const collectionRef = collection(db, `Users/${currentUserId}/measurements`);
   const data = await getDocs(collectionRef);
   useState(data.docs.map((singleDoc) => ({ ...singleDoc.data(), id: singleDoc.id })));
 }
-export async function deleteMeasurements(id) {
+export async function deleteMeasurements(currentUserId, id) {
   try {
-    const docRef = doc(db, 'measurements', id);
+    const docRef = doc(db, `Users/${currentUserId}`, id);
     await deleteDoc(docRef);
   } catch (error) {
     console.log(error);

@@ -9,15 +9,25 @@ import Paper from '@mui/material/Paper';
 import React, { useState, useEffect } from 'react';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { IconButton } from '@mui/material';
-import { deleteMeasurements, getMeasurements } from '../../firebase';
+import { deleteMeasurements, auth, getMeasurements } from '../../firebase';
 
 export default function StatisticsTabs() {
+  const [currentUserId, setCurrentUserId] = useState('');
   const [measurements, setMeasurements] = useState([]);
-  useEffect(() => {
-    getMeasurements(setMeasurements);
-    return () => {
 
-    };
+  // FIXME czy cleanup tutaj jest potrzebny????? i skracanie o return
+  useEffect(() => {
+    const unsubscribe = getMeasurements(currentUserId, setMeasurements);
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setCurrentUserId(user.uid);
+      }
+    });
+    return () => unsubscribe();
   }, []);
 
   return (
@@ -77,7 +87,7 @@ export default function StatisticsTabs() {
                 cm
               </TableCell>
               <TableCell sx={{ width: '1%', p: 0 }}>
-                <IconButton onClick={() => deleteMeasurements(measure.id)}>
+                <IconButton onClick={() => deleteMeasurements(currentUserId, measure.id)}>
                   <DeleteForeverIcon color="error" />
                 </IconButton>
               </TableCell>
