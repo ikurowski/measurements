@@ -30,6 +30,7 @@ export default function NavBar({ toggleDrawer }) {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="relative">
         <Toolbar>
+          {LoggedIn && (
           <IconButton
             onClick={toggleDrawer(matches ? 'top' : 'left', true)}
             size="large"
@@ -40,9 +41,10 @@ export default function NavBar({ toggleDrawer }) {
           >
             <MenuIcon />
           </IconButton>
+          )}
           <ScaleIcon
             fontSize="large"
-            sx={{ display: { xs: 'flex', sm: 'none' }, flexGrow: 1, ml: LoggedIn ? 11 : 2 }}
+            sx={{ display: { xs: 'flex', sm: 'none' }, flexGrow: 1, ml: LoggedIn ? 11 : 5 }}
           />
           <Typography
             variant="h6"
@@ -72,7 +74,7 @@ export default function NavBar({ toggleDrawer }) {
             </>
           ) : (
             <Button sx={{ ml: 'auto' }} href="/" color="inherit">
-              Login
+              Log in
             </Button>
           )}
         </Toolbar>
