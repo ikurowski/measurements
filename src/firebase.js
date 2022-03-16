@@ -6,7 +6,16 @@ import {
   signOut,
 } from 'firebase/auth';
 import {
-  addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc,
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  getFirestore,
+  orderBy,
+  query,
+  serverTimestamp,
+  setDoc,
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -48,7 +57,7 @@ export async function logOut() {
 export async function addMeasurements(currentUserId, data) {
   try {
     const collectionRef = collection(db, `Users/${currentUserId}/measurements`);
-    await addDoc(collectionRef, data);
+    await addDoc(collectionRef, { ...data, timestamp: serverTimestamp() });
   } catch (error) {
     console.log(error);
   }
@@ -57,8 +66,16 @@ export async function addMeasurements(currentUserId, data) {
 export async function getMeasurements(currentUserId, useState) {
   try {
     const collectionRef = collection(db, `Users/${currentUserId}/measurements`);
-    const data = await getDocs(collectionRef);
-    useState(data.docs.map((singleDoc) => ({ ...singleDoc.data(), id: singleDoc.id })));
+    const q = query(collectionRef, orderBy('timestamp'));
+    const data = await getDocs(q);
+
+    useState(
+      data.docs
+        .map((singleDoc) => ({
+          ...singleDoc.data(),
+          id: singleDoc.id,
+        })),
+    );
   } catch (error) {
     console.log(error);
   }

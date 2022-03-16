@@ -16,7 +16,7 @@ import { auth, logOut } from '../../firebase';
 export default function NavBar({ toggleDrawer }) {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('md'));
-  const [LoggedIn, setLoggedIn] = useState(null);
+  const [LoggedIn, setLoggedIn] = useState(false);
 
   auth.onAuthStateChanged((user) => {
     if (user) {
@@ -36,6 +36,7 @@ export default function NavBar({ toggleDrawer }) {
             edge="start"
             color="inherit"
             aria-label="menu"
+            disabled={!LoggedIn}
           >
             <MenuIcon />
           </IconButton>
@@ -80,4 +81,4 @@ export default function NavBar({ toggleDrawer }) {
   );
 }
 
-NavBar.propTypes = PropTypes.func;
+NavBar.propTypes = PropTypes.func.isRequired;
