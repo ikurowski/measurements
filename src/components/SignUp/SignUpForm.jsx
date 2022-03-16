@@ -37,6 +37,7 @@ export default function SignUpForm() {
         {ErrorsAPI && <Alert sx={{ margin: 'auto', width: { md: 300, xs: 240 } }} severity="error">Wrong e-mail or password</Alert>}
         <div>
           <TextField
+            aria-label="email field"
             sx={{ minWidth: { md: 300, xs: 240 }, mt: 3 }}
             id="emailSignUp"
             name="email"
@@ -50,6 +51,7 @@ export default function SignUpForm() {
         </div>
         <div>
           <TextField
+            aria-label="password field"
             sx={{ minWidth: { md: 300, xs: 240 }, mt: 3 }}
             id="passwordSignUp"
             name="password"
@@ -64,6 +66,7 @@ export default function SignUpForm() {
         </div>
         <div>
           <TextField
+            aria-label="confirm password field"
             sx={{ minWidth: { md: 300, xs: 240 }, mt: 3 }}
             id="confirmPassword"
             name="confirmPassword"
@@ -77,7 +80,7 @@ export default function SignUpForm() {
           />
         </div>
 
-        <Button sx={{ minWidth: { md: 250, xs: 200 }, mt: 3, mb: 0.2 }} variant="contained" type="submit" id="buttonSignUp">
+        <Button aria-label="sign up button" sx={{ minWidth: { md: 250, xs: 200 }, mt: 3, mb: 0.2 }} variant="contained" type="submit" id="buttonSignUp">
           Sign up!
         </Button>
       </form>

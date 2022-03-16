@@ -42,6 +42,7 @@ export default function SignInForm() {
         {ErrorsAPI && <Alert sx={{ margin: 'auto', width: { md: 300, xs: 240 } }} severity="error">Wrong e-mail or password</Alert>}
         <div>
           <TextField
+            aria-label="email field"
             sx={{ minWidth: { md: 300, xs: 240 }, mt: 3 }}
             id="emailSignIn"
             name="email"
@@ -55,6 +56,7 @@ export default function SignInForm() {
         </div>
         <div>
           <TextField
+            aria-label="password field"
             sx={{ minWidth: { md: 300, xs: 240 }, mt: 3 }}
             id="passwordSignIn"
             name="password"
@@ -68,6 +70,7 @@ export default function SignInForm() {
           />
         </div>
         <Button
+          aria-label="sign in button"
           sx={{ minWidth: { md: 250, xs: 200 }, mt: 3, mb: 0.2 }}
           variant="contained"
           type="submit"
@@ -77,7 +80,7 @@ export default function SignInForm() {
         </Button>
         <Typography fontSize={{ xs: 'small', md: 16 }} variant="body2" color>
           { 'Don\'t have an account?'}
-          <Link sx={{ pl: 0.2 }} href="/SignUp" type="button">
+          <Link aria-label="sing up href" sx={{ pl: 0.2 }} href="/SignUp" type="button">
             Sign up here.
           </Link>
         </Typography>

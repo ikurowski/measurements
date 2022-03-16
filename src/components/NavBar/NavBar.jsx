@@ -63,6 +63,7 @@ export default function NavBar({ toggleDrawer }) {
                 {auth.currentUser?.email}
               </Button>
               <Button
+                aria-label="logout button"
                 href="/"
                 onClick={() => logOut()}
                 color="inherit"
@@ -73,7 +74,7 @@ export default function NavBar({ toggleDrawer }) {
               </Button>
             </>
           ) : (
-            <Button sx={{ ml: 'auto' }} href="/" color="inherit">
+            <Button aria-label="login button" sx={{ ml: 'auto' }} href="/" color="inherit">
               Log in
             </Button>
           )}
