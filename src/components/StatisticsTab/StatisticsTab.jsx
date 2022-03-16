@@ -82,7 +82,7 @@ export default function StatisticsTabs() {
               </TableCell>
               <TableCell sx={{ width: '1%', p: 0 }}>
                 <IconButton onClick={(e) => {
-                  e.target.parentElement.parentElement.parentElement.parentElement.style.display = 'none';
+                  e.target.closest('tr').style.display = 'none';
                   deleteMeasurements(currentUserId, measure.id);
                 }}
                 >

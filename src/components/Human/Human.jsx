@@ -312,7 +312,7 @@ export default function Human() {
       <Button
         type="submit"
         sx={{
-          minWidth: { md: 300, xs: 240 }, margin: '0 auto', mt: 3, display: 'block',
+          minWidth: { md: 300, xs: 240 }, margin: '2rem auto', display: 'block',
         }}
         variant="contained"
       >
