@@ -1,6 +1,6 @@
 # Measurements 📏 
 
-Simple app for measurements to help you track your gains and losses
+Simple app for measurements to help track your gains and losses
 # Links 🔗
 
 https://measurements-io.netlify.app/ <br />
