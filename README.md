@@ -12,6 +12,7 @@ React <br />
 Material UI <br />
 Firebase <br />
 Formik <br />
+Yup <br />
 
 # Features 📋
 
