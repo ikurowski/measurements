@@ -4,7 +4,6 @@ Simple app for measurements to help track your gains and losses
 # Links 🔗
 
 https://measurements-io.netlify.app/ <br />
-https://github.com/ikurowski/measurements <br />
 
 # Technologies 📡 
 
